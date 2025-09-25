@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(120deg, #7fbcff 0%, #e0c3fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .auth-container {
+            display: flex;
+            gap: 40px;
+        }
+        .auth-box {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px #b0b0b0a0;
+            padding: 22px 16px 18px 16px;
+            min-width: 240px;
+            max-width: 320px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .auth-title {
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .tab-group {
+            display: flex;
+            margin-bottom: 18px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 8px 0;
+            border: none;
+            background: #e3e9f7;
+            color: #1a237e;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .tab-btn.active {
+            background: linear-gradient(90deg, #2196f3 60%, #1565c0 100%);
+            color: #fff;
+        }
+        .auth-input {
+            margin-bottom: 10px;
+            padding: 8px 10px;
+            border: 1.5px solid #bdbdbd;
+            border-radius: 7px;
+            font-size: 0.98em;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .auth-input:focus {
+            border: 1.5px solid #2196f3;
+        }
+        .auth-link {
+            color: #1976d2;
+            text-decoration: none;
+            font-size: 0.97em;
+            margin-bottom: 10px;
+        }
+        .auth-link:hover { text-decoration: underline; }
+        .auth-btn {
+            background: linear-gradient(90deg, #2196f3 60%, #1565c0 100%);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 8px 0;
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .switch-link {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.98em;
+        }
+        @media (max-width: 900px) {
+            .auth-container { flex-direction: column; gap: 18px; }
+            .auth-box { min-width: 180px; max-width: 98vw; }
+        }
+        @media (max-width: 600px) {
+            .auth-title { font-size: 1em; }
+            .auth-box { padding: 10px 4vw 12px 4vw; }
+            .auth-input { font-size: 0.95em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Login Box -->
+        <div class="auth-box" id="loginBox">
+            <div class="auth-title">Form Login</div>
+            <div class="tab-group">
+                <button class="tab-btn active" id="loginTab">Login</button>
+                <button class="tab-btn" id="toRegisterTab">Daftar</button>
+            </div>
+            <input class="auth-input" type="text" id="loginUsername" placeholder="Masukan Username">
+            <input class="auth-input" type="password" id="loginPassword" placeholder="Masukan Password">
+            <div style="margin-top:24px;"><button class="auth-btn" id="loginBtn">Login</button></div>
+            <div class="switch-link">Belum punya akun? <a href="#" id="switchToRegister">Daftar sekarang</a></div>
+        </div>
+        <!-- Register Box -->
+        <div class="auth-box" id="registerBox" style="display:none;">
+            <div class="auth-title">Form Registrasi</div>
+            <div class="tab-group">
+                <button class="tab-btn" id="toLoginTab">Login</button>
+                <button class="tab-btn active" id="registerTab">Daftar</button>
+            </div>
+            <input class="auth-input" type="text" id="registerUsername" placeholder="Username">
+            <input class="auth-input" type="email" id="registerEmail" placeholder="Email">
+            <input class="auth-input" type="password" id="registerPassword" placeholder="Password">
+            <input class="auth-input" type="password" id="registerPassword2" placeholder="Ulangi Password">
+            <div style="margin-top:24px;"><button class="auth-btn" id="registerBtn">Daftar</button></div>
+            <div class="switch-link"><a href="#" id="switchToLogin">Sudah punya akun? Login</a></div>
+        </div>
+    </div>
+    <script>
+    // Tab & Switch logic
+    const loginBox = document.getElementById('loginBox');
+    const registerBox = document.getElementById('registerBox');
+    document.getElementById('loginTab').onclick = () => { loginBox.style.display = ''; registerBox.style.display = 'none'; };
+    document.getElementById('toRegisterTab').onclick = () => { loginBox.style.display = 'none'; registerBox.style.display = ''; };
+    document.getElementById('toLoginTab').onclick = () => { loginBox.style.display = ''; registerBox.style.display = 'none'; };
+    document.getElementById('registerTab').onclick = () => { loginBox.style.display = 'none'; registerBox.style.display = ''; };
+    document.getElementById('switchToRegister').onclick = (e) => { e.preventDefault(); loginBox.style.display = 'none'; registerBox.style.display = ''; };
+    document.getElementById('switchToLogin').onclick = (e) => { e.preventDefault(); loginBox.style.display = ''; registerBox.style.display = 'none'; };
+
+    // Show/hide password toggle (optional, for UX)
+    // ...existing code...
+
+    // AJAX Login
+    document.getElementById('loginBtn').onclick = async function() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        this.disabled = true; this.textContent = 'Loading...';
+        let err = '';
+        try {
+            const resp = await fetch('/api/ajax_login/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await resp.json();
+            if (data.success) {
+                window.location.href = '/dashboard/';
+                return;
+            } else {
+                err = data.message || 'Login gagal';
+            }
+        } catch(e) { err = 'Gagal koneksi ke server'; }
+        this.disabled = false; this.textContent = 'Login';
+        showError('login', err);
+    };
+
+    // AJAX Register
+    document.getElementById('registerBtn').onclick = async function() {
+        const usernameEl = document.getElementById('registerUsername');
+        const emailEl = document.getElementById('registerEmail');
+        const passEl = document.getElementById('registerPassword');
+        const pass2El = document.getElementById('registerPassword2');
+        const username = usernameEl ? usernameEl.value.trim() : '';
+        const email = emailEl ? emailEl.value.trim() : '';
+        const password = passEl ? passEl.value : '';
+        const password2 = pass2El ? pass2El.value : '';
+        this.disabled = true; this.textContent = 'Loading...';
+        let err = '';
+        if (!username) err = 'Username wajib diisi';
+        else if (!email) err = 'Email wajib diisi';
+        else if (!password) err = 'Password wajib diisi';
+        else if (!password2) err = 'Ulangi password wajib diisi';
+        else if (password !== password2) err = 'Password tidak sama';
+        if (err) { this.disabled = false; this.textContent = 'Daftar'; showError('register', err); return; }
+        try {
+            const resp = await fetch('/api/ajax_register/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, email, password })
+            });
+            const data = await resp.json();
+            if (data.success) {
+                window.location.href = '/dashboard/';
+                return;
+            } else {
+                err = data.message || 'Registrasi gagal';
+            }
+        } catch(e) { err = 'Gagal koneksi ke server'; }
+        this.disabled = false; this.textContent = 'Daftar';
+        showError('register', err);
+    };
+
+    // Error display helper
+    function showError(type, msg) {
+        let el = document.getElementById(type+'Error');
+        if (!el) {
+            el = document.createElement('div');
+            el.id = type+'Error';
+            el.style.color = '#c0392b';
+            el.style.margin = '8px 0 0 0';
+            el.style.fontSize = '0.98em';
+            if (type === 'login') loginBox.insertBefore(el, document.getElementById('loginBtn'));
+            else registerBox.insertBefore(el, document.getElementById('registerBtn'));
+        }
+        el.textContent = msg;
+    }
+    </script>
+</body>
+</html>
