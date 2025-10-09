@@ -76,7 +76,7 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>Smart Beef Freshness Monitoring</title>
+    <title>Monitoring Kesegaran Daging Sapi Pintar</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
@@ -166,7 +166,7 @@
             <span></span>
             <span></span>
         </button>
-    <div class="logo" style="flex:1;text-align:center;"><i class="fas fa-lemon"></i> Smart Beef Freshness Monitoring</div>
+    <div class="logo" style="flex:1;text-align:center;"><i class="fas fa-lemon"></i> Monitoring Kesegaran Daging Sapi Pintar</div>
         <div class="auth" style="display:flex;gap:12px;">
             {% if user.is_authenticated %}
                 <span id="userWelcome" style="font-weight:bold;">👤 {{ user.username }}</span>
@@ -183,7 +183,7 @@
     <ul>
         <li id="engineerMenu" style="position:relative;cursor:pointer;flex-direction:column;align-items:flex-start;">
             <div style="display:flex;align-items:center;gap:12px;width:100%;" onclick="toggleEngineer()">
-                <i class="fas fa-cog"></i> Engineer <i id="engineerArrow" class="fas fa-chevron-down" style="font-size:0.9em;margin-left:8px;"></i>
+                <i class="fas fa-cog"></i> Insinyur <i id="engineerArrow" class="fas fa-chevron-down" style="font-size:0.9em;margin-left:8px;"></i>
             </div>
             <ul id="engineerList" style="display:none;width:100%;margin:0;padding:0 0 0 36px;list-style:disc;background:transparent;border-radius:0;box-shadow:none;">
                 <li style="padding:6px 0 6px 0;">Amar Mustopa</li>
@@ -212,11 +212,11 @@
     <div class="modal-bg" id="loginModal">
         <div class="modal">
             <button class="close-btn" onclick="hideLogin()">&times;</button>
-            <h2>Login</h2>
+            <h2>Masuk</h2>
             <form>
-                <label>Username</label>
+                <label>Nama Pengguna</label>
                 <input type="text" id="loginUsername" required>
-                <label>Password</label>
+                <label>Kata Sandi</label>
                 <input type="password" id="loginPassword" required>
                 <button type="submit" id="loginSubmit">Login</button>
             </form>
@@ -226,13 +226,13 @@
     <div class="modal-bg" id="registerModal">
         <div class="modal">
             <button class="close-btn" onclick="hideRegister()">&times;</button>
-            <h2>Register</h2>
+            <h2>Daftar</h2>
             <form>
                 <label>Email</label>
                 <input type="email" id="registerEmail" required>
-                <label>Username</label>
+                <label>Nama Pengguna</label>
                 <input type="text" id="registerUsername" required>
-                <label>Password</label>
+                <label>Kata Sandi</label>
                 <input type="password" id="registerPassword" required>
                 <button type="submit" id="registerSubmit">Register</button>
             </form>
@@ -328,7 +328,7 @@
                                 <option value="TIDAK LAYAK">TIDAK LAYAK</option>
                             </select>
                         </label>
-                        <button type="button" id="exportCsvBtn" style="margin-left:auto;background:#5a67d8;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-weight:600;cursor:pointer;">Export CSV</button>
+                        <button type="button" id="exportCsvBtn" style="margin-left:auto;background:#5a67d8;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-weight:600;cursor:pointer;">Ekspor CSV</button>
                     </form>
                     <table id="historyTable" style="width:100%;border-collapse:collapse;">
                         <tr style="background:#e0e0e0;">

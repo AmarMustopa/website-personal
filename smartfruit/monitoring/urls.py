@@ -1,11 +1,8 @@
-from django.contrib import admin
-
 from django.urls import path
 from monitoring import views
 from monitoring import views_auth
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', views.landing_auth, name='landing_auth'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('export/', views.export_csv, name='export_csv'),
